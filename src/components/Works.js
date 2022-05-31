@@ -1,58 +1,71 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from "react";
 
-import WorkItem from '../elements/WorkItem'
+import WorkItem from "../elements/WorkItem";
 
-import works from '../data/Works'
+import works from "../data/Works";
 
 function Works() {
+  const [filter, setFilter] = useState("all");
+  const [projects, setProjects] = useState([]);
 
-    const [filter, setFilter] = useState('all')
-    const [projects, setProjects] = useState([])
+  useEffect(() => {
+    setProjects(works);
+  }, []);
 
-    useEffect(() => {
-        setProjects(works)
-    }, []);
+  useEffect(() => {
+    setProjects([]);
+    let worksUpdated = [];
+    for (let i = 0; i < works.length; i++) {
+      if (filter !== "all" && !works[i].category.includes("portfolio-hidden")) {
+        works[i].category = `${works[i].category} portfolio-hidden`;
+      }
+      if (filter === "all") {
+        let mue = works[i].category.split(" ");
+        works[i].category = mue[0];
+      }
+      if (works[i].category.includes(filter)) {
+        works[i].category = filter;
+      }
+      worksUpdated.push(works[i]);
+    }
+    setProjects(worksUpdated);
+  }, [filter]);
 
-    useEffect(() => {
-        setProjects([])
-        let worksUpdated = []
-        for(let i=0; i<works.length; i++){
-            if(filter !== 'all' && !works[i].category.includes('portfolio-hidden')){
-                works[i].category = `${works[i].category} portfolio-hidden`
-            }
-            if(filter === 'all'){
-                let mue = works[i].category.split(' ')
-                works[i].category = mue[0]
-            }
-            if(works[i].category.includes(filter)){
-                works[i].category = filter
-            }
-            worksUpdated.push(works[i])
-        }
-        setProjects(worksUpdated);
-    }, [filter]);
+  const worksFilters = ["all", "historic", "specialized"];
+  // const worksFilters = ['all', 'Interior', 'Exterior', 'Murals']
+  const displayWorks = projects.map((item, i) => (
+    <WorkItem
+      key={i}
+      title={item.name}
+      category={item.category}
+      image={item.image}
+      id={item.id}
+    />
+  ));
 
-    const worksFilters = ['all', 'design', 'branding', 'strategy']
-    const displayWorks = projects.map((item, i) => <WorkItem key={i} title={item.name} category={item.category} image={item.image} id={item.id}/>)
+  return (
+    <section id="portfolioSection" className="section">
+      <div className="container-fluid-small">
+        <h2 className="anim-bot big-title">
+          We're proud of our work <br /> because we always give the best.
+        </h2>
 
-    return(
-        <section id="portfolioSection" className="section">
-            <div className="container-fluid-small">
+        <nav className="nav portfolio-nav anim-bot">
+          {worksFilters.map((item, i) => (
+            <a
+              key={i}
+              className={`nav-item ${filter === item ? "active" : null}`}
+              onClick={() => setFilter(item)}
+            >
+              {item}
+            </a>
+          ))}
+        </nav>
 
-                <h2 className="anim-bot big-title">We're proud of our work <br /> because we always give the best.</h2>
-
-                <nav className="nav portfolio-nav anim-bot">
-                    {worksFilters.map((item, i) => <a key={i} className={`nav-item ${filter === item ? 'active' : null}`} onClick={() => setFilter(item)}>{item}</a>)}
-                </nav>
-
-                <div className="row portfolio-row anim-bot-big">
-                    {displayWorks}
-                </div>
-
-            </div>
-        </section>
-    )
-
+        <div className="row portfolio-row anim-bot-big">{displayWorks}</div>
+      </div>
+    </section>
+  );
 }
 
-export default Works
+export default Works;
