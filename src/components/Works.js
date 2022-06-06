@@ -4,6 +4,7 @@ import WorkItem from "../elements/WorkItem";
 
 import works from "../data/Works";
 
+// need to remove show on scroll
 function Works() {
   const [filter, setFilter] = useState("all");
   const [projects, setProjects] = useState([]);

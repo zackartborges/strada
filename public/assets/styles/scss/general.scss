@@ -8,8 +8,8 @@ html{
 }
 
 body{
-    background: #050505;
-    color: #fff;
+    background: #fffef2;
+    color: rgb(26, 167, 63);
     font-family: "Inter", sans-serif;
     font-size: 16px;
     overflow-x: hidden !important;
@@ -89,7 +89,7 @@ ul{
         line-height: 2.4;
         letter-spacing: .2px;
         font-size: .9em;
-        color: #fff;
+        color: rgb(210, 102, 124);
     }
 }
 
@@ -111,7 +111,7 @@ a{
         transition: .25s cubic-bezier(.75,.25,.25,.75);
     }
     &:hover{
-        color: #fff !important;
+        color: rgb(114, 7, 29) !important;
         outline: 0;
         text-decoration: none;
         transition: .25s cubic-bezier(.75,.25,.25,.75);

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 import Hero from "../components/Hero";
 import Header from "../components/Header";
-import Works from "../components/Works";
+// import Works from "../components/Works";
 import Footer from "../components/Footer";
 
 function Home() {
@@ -56,11 +56,11 @@ function Home() {
         className="page-trans"
       ></motion.div>
       <Header />
-      <Hero background={"/assets/images/biggie.jpg"}>
+      <Hero background={"/assets/images/home_photo_copy.jpg"}>
         <h6 className="sub-title hero-title">Welcome</h6>
         <h1 className="big-title hero-title">Daughters of Paint</h1>
       </Hero>
-      <Works />
+      {/* <Works /> */}
       <Footer />
     </div>
   );
